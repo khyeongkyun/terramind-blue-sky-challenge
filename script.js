@@ -19,23 +19,6 @@ const OVERLAY_LAYERS = [
   { id: "tim-both-d", label: "Input: S1RTC, S2L2A (TiM: DEM)", path: "samples/pred/zf-tim-sar-opt/d" },
   { id: "tim-both-dl", label: "Input: S1RTC, S2L2A (TiM: DEM, LULC)", path: "samples/pred/zf-tim-sar-opt/dl" },
 ];
-// const BASEMAPS = {
-//   light: {
-//     name: "OpenStreetMap Light",
-//     tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-//     attribution: "&copy; OpenStreetMap contributors",
-//   },
-//   satellite: {
-//     name: "Esri World Imagery",
-//     tiles: ["https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
-//     attribution: "Tiles &copy; Esri",
-//   },
-//   terrain: {
-//     name: "OpenTopoMap",
-//     tiles: ["https://a.tile.opentopomap.org/{z}/{x}/{y}.png"],
-//     attribution: "Map data &copy; OpenStreetMap contributors, SRTM | OpenTopoMap",
-//   },
-// };
 
 const EUROPE_VIEW_BOUNDS = [
   [-25, 35.5],
@@ -65,8 +48,6 @@ const el = {
   baseImage: document.getElementById("base-image"),
   overlayImage: document.getElementById("overlay-image"),
   overlaySlider: document.getElementById("overlay-slider"),
-  // mapReset: document.getElementById("map-reset"),
-  // mapFallback: document.getElementById("map-fallback"),
   copyCitation: document.getElementById("copy-citation"), // safe — guarded in bindEvents
   bibtex: document.getElementById("bibtex"),
   legendImage: document.getElementById("legend-image"),
@@ -74,30 +55,6 @@ const el = {
 };
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-// function basemapStyle(kind) {
-//   const source = BASEMAPS[kind] || BASEMAPS.light;
-//   return {
-//     version: 8,
-//     sources: {
-//       basemap: {
-//         type: "raster",
-//         tiles: source.tiles,
-//         tileSize: 256,
-//         attribution: source.attribution,
-//       },
-//     },
-//     layers: [
-//       {
-//         id: "basemap",
-//         type: "raster",
-//         source: "basemap",
-//         minzoom: 0,
-//         maxzoom: 19,
-//       },
-//     ],
-//   };
-// }
 
 function imagePath(layer, sample) {
   return `${layer.path}/${sample.id}.png`;
@@ -142,46 +99,6 @@ function countrySamples() {
   if (state.country === "all") return state.samples;
   return state.samples.filter((sample) => sample.country === state.country);
 }
-
-// function sampleBounds(samples) {
-//   const valid = samples.filter((sample) => {
-//     const [lng, lat] = coordinatePair(sample);
-//     return Number.isFinite(lng) && Number.isFinite(lat);
-//   });
-//   if (!valid.length || !window.maplibregl) return null;
-
-//   const firstPoint = coordinatePair(valid[0]);
-//   const bounds = new maplibregl.LngLatBounds(
-//     firstPoint,
-//     firstPoint,
-//   );
-//   valid.slice(1).forEach((sample) => bounds.extend(coordinatePair(sample)));
-//   return bounds;
-// }
-
-// function fitSamples(samples, options = {}) {
-//   if (!state.map || !samples.length) return;
-
-//   if (samples.length === 1) {
-//     state.map[options.animate ? "flyTo" : "jumpTo"]({
-//       center: coordinatePair(samples[0]),
-//       zoom: 6,
-//       duration: options.animate ? 900 : 0,
-//       essential: true,
-//     });
-//     return;
-//   }
-
-//   const bounds = sampleBounds(samples);
-//   if (!bounds) return;
-
-//   state.map.fitBounds(bounds, {
-//     padding: options.padding || { top: 70, right: 70, bottom: 70, left: 70 },
-//     maxZoom: options.maxZoom || 5.8,
-//     duration: options.animate ? 900 : 0,
-//     essential: true,
-//   });
-// }
 
 function formatCount(value, counter) {
   const decimals = Number(counter.dataset.decimals || 0);
@@ -380,25 +297,6 @@ function bindEvents() {
     el.comparison.style.setProperty("--reveal", `${el.overlaySlider.value}%`);
   });
   el.comparison.style.setProperty("--reveal", `${el.overlaySlider.value}%`);
-
-  // document.querySelectorAll(".map-style[data-style]").forEach((button) => {
-  //   button.addEventListener("click", () => {
-  //     document.querySelectorAll(".map-style[data-style]").forEach((item) => item.classList.remove("active"));
-  //     button.classList.add("active");
-  //     state.mapStyle = button.dataset.style;
-  //     if (state.map) state.map.setStyle(basemapStyle(state.mapStyle));
-  //   });
-  // });
-
-  // if (el.mapReset) {
-  //   el.mapReset.addEventListener("click", () => {
-  //     state.country = "all";
-  //     el.countrySelect.value = "all";
-  //     populateSampleSelect();
-  //     updateMarkerStates();
-  //     fitSamples(state.samples, { animate: true });
-  //   });
-  // }
 
   if (el.copyCitation) {
     el.copyCitation.addEventListener("click", async () => {
