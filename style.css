@@ -606,7 +606,8 @@ h2 {
 }
 
 .framework-figure {
-  max-width: 100%;
+  max-width: 1180px;
+  width: 100%;        /* ← this is what was added */
   justify-self: center;
 }
 
