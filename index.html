@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="ZeroFlood turns minimal satellite observations into interactive flood hazard intelligence using geospatial foundation models."
+    >
+    <title>ZeroFlood</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+    <link rel="stylesheet" href="style.css?v=pitch-1">
+  </head>
+  <body>
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="nav-logo" href="#overview">ZeroFlood 🛰️ 🚧 🌊🌊 🚧 🛰️</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#model_demo">Model & Demo</a>
+        <a href="#dataset">Dataset</a>
+        <a href="#experiment">Experiment</a>
+        <a href="#citation">Citation</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero" id="overview">
+        <div class="hero-shell">
+          <p class="eyebrow">2nd ESA-NASA International Workshop on AI Foundation Models for EO</p>
+          <h1>ZeroFlood</h1>
+          <p class="hero-subtitle">
+            Flood Hazard Mapping from a single modality input using TerraMind and Thinking-in-Modality.
+          </p>
+          <div class="signal-badges" aria-label="ZeroFlood value proposition">
+            <a href="https://huggingface.co/spaces/ibm-esa-geospatial/challenge" target="_blank" rel="noreferrer">TerraMind Blue-Sky Challenge</a>
+          </div>
+
+          <p class="authors">Hyeongkyun Kim <span>German Aerospace Center (DLR)</span><br>Orestis Oikonomou <span>ETH Zurich, ETH AI Center</span></p>
+
+          <div class="button-row">
+            <a class="button resource-button" href="https://arxiv.org/abs/2510.23364" target="_blank" rel="noreferrer" aria-label="Open ZeroFlood on arXiv">
+              <span class="resource-icon arxiv-icon" aria-hidden="true">arXiv</span>
+              <span>arXiv</span>
+            </a>
+            <a class="button resource-button" href="https://github.com/khyeongkyun/zeroflood" target="_blank" rel="noreferrer" aria-label="Open ZeroFlood on GitHub">
+              <span class="resource-icon github-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M12 2C6.5 2 2 6.6 2 12.2c0 4.5 2.9 8.3 6.8 9.6.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.7.1-.7.1-.7 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.9.1-.7.4-1.1.7-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.8-.1-.3-.4-1.3.1-2.8 0 0 .9-.3 2.8 1.1.8-.2 1.6-.3 2.5-.3s1.7.1 2.5.3c1.9-1.4 2.8-1.1 2.8-1.1.5 1.5.2 2.5.1 2.8.6.8 1 1.7 1 2.8 0 3.9-2.4 4.7-4.6 5 .4.3.7 1 .7 2v2.8c0 .3.2.6.7.5 4-1.3 6.8-5.1 6.8-9.6C22 6.6 17.5 2 12 2Z"/>
+                </svg>
+              </span>
+              <span>GitHub</span>
+            </a>
+            <a class="button resource-button" href="https://huggingface.co/datasets/khyeongkyun/zeroflood" target="_blank" rel="noreferrer" aria-label="Open ZeroFlood on Hugging Face">
+              <span class="resource-icon hf-icon" aria-hidden="true">HF</span>
+              <span>Hugging Face</span>
+            </a>
+            </a>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-inner">
+          <p class="section-kicker">About</p>
+          <h2>Flood hazard mapping is essential for disaster prevention but...</h2>
+          <div class="prose">
+            <p>
+              It remains challenging in data-scarce regions, where traditional hydrodynamic models require extensive geophysical inputs. We introduce ZeroFlood, a framework that leverages the geospatial foundation model: TerraMind to predict flood hazard maps. It relies only on SAR or multispectral imagery to identify flood-prone regions. This capability is enabled by a Thinking-in-Modality process, which compensates for missing spatial information such as land use/land cover (LULC) and digital elevation models (DEM).
+
+              This demo page presents an interactive exploration of ZeroFlood, including: (1) visualizations of sample locations and corresponding model predictions, (2) a schematic overview of the model architecture and data flow, (3) descriptions of dataset creation and spatial distribution, and (4) experimental results comparing performance with baseline models.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="alt" id="model_demo">
+        <div class="section-inner wide">
+          <p class="section-kicker">Model & Demo</p>
+          <h2>ZeroFlood: Flood hazard mapping with a single-modality</h2>
+
+          <!-- Two-column layout: explorer on right (desktop), on top (mobile) -->
+          <div class="model-demo-layout">
+
+            <!-- Left column on desktop / bottom on mobile: architecture figure -->
+            <div class="method-layout">
+              <figure class="paper-figure framework-figure">
+                <img src="assets/model.png" alt="ZeroFlood model architecture">
+                <figcaption>
+                    A single- or double-modality input (Sentinel-1, Sentinel-2, or both) is processed through a Thinking-in-Modalities stage that generates auxiliary modalities (e.g., cross-sensor translation, land use/land cover, and digital elevation). These enriched representations are then fed into a TerraMind-based encoder–decoder (with UPerNet) to produce flood hazard area predictions while minimizing data and computational requirements. This diagram shows an example of S1RTC input with TiM modalities, LULC and DEM.
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- Right column on desktop / top on mobile: sample explorer -->
+            <aside class="explorer-card" aria-label="Selected sample explorer">
+              <div class="selector-grid">
+                <label>
+                  Country
+                  <select id="country-select"></select>
+                </label>
+                <label>
+                  Region
+                  <select id="sample-select"></select>
+                </label>
+                <label class="selector-full">
+                  Background
+                  <select id="input-select"></select>
+                </label>
+                <label class="selector-full">
+                  Predict with
+                  <select id="overlay-select"></select>
+                </label>
+              </div>
+
+              <div class="sample-meta">
+                <p class="meta-label">Selected location</p>
+                <h3 id="sample-title">Loading samples...</h3>
+                <p id="sample-coords"></p>
+              </div>
+
+              <div class="comparison" id="comparison">
+                <img id="base-image" class="base-image" alt="Selected Earth-observation context layer">
+                <img id="overlay-image" class="overlay-image" alt="Selected flood hazard overlay">
+              </div>
+              <div class="slider-row">
+                <input id="overlay-slider" type="range" min="0" max="100" value="58" aria-label="Reveal flood overlay">
+              </div>
+              <div class="legend-row">
+                <img id="legend-image" src="./assets/legend_w_fh.png" alt="Legend">
+                <img id="legend-image2" src="./assets/legend_w_fh.png" alt="Flood hazard legend">
+              </div>
+            </aside>
+
+          </div><!-- /.model-demo-layout -->
+        </div>
+      </section>
+
+      <section id="dataset">
+        <div class="section-inner wide">
+          <p class="section-kicker">Dataset</p>
+          <h2>Combining multimodal EO dataset with Flood hazard simulation masks</h2>
+          <div class="dataset-grid">
+            <figure class="paper-figure">
+              <img src="assets/dataset_1.png" alt="ZeroFlood dataset creation diagram">
+              <figcaption>The ZeroFlood dataset consists of two components: an EO dataset (TerraMesh) and flood hazard simulation masks for the European region (LISFLOOD-FP).</figcaption>
+            </figure>
+            <figure class="paper-figure">
+              <img src="assets/dataset_2.png" alt="Spatial heat map of ZeroFlood samples">
+              <figcaption>Spatial heatmap of the ZeroFlood dataset at one-degree resolution, with the total number of samples indicated in parentheses.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="experiment">
+        <div class="section-inner wide">
+          <p class="section-kicker">Experiment results</p>
+          <h2>Evaluate on Baseline, Other GeoFMs, and TerraMind w/ or w/o Thinking-in-Modality</h2>
+
+          <!-- Tab buttons -->
+          <div class="result-tabs" role="tablist">
+            <button class="result-tab active" data-target="result-s1rtc" role="tab">S1RTC</button>
+            <button class="result-tab" data-target="result-s2l2a" role="tab">S2L2A</button>
+            <button class="result-tab" data-target="result-both" role="tab">S1RTC &amp; S2L2A</button>
+          </div>
+
+          <div class="results-grid">
+            <article class="result-table-card" id="result-s1rtc">
+              <h3>S1RTC input</h3>
+              <table>
+                <thead><tr><th>Model</th><th>F1</th><th>Recall</th><th>Precision</th></tr></thead>
+                <tbody>
+                  <tr><td>UNet</td><td>84.66</td><td>81.00</td><td>88.67</td></tr>
+                  <tr><td>ViT</td><td>84.64</td><td>81.46</td><td>88.08</td></tr>
+                  <tr><td>SSL4EO-MAE</td><td>85.23</td><td>81.39</td><td>89.44</td></tr>
+                  <tr><td>CROMA</td><td>83.63</td><td>79.72</td><td>87.95</td></tr>
+                  <tr><td>DOFA</td><td>86.90</td><td>84.80</td><td>89.11</td></tr>
+                  <tr><td>TerraMind</td><td>88.36</td><td>86.77</td><td>90.02</td></tr>
+                  <td>TerraMind-TiM-l</td><td class="cell-highlight">89.12</td><td class="cell-highlight">88.45</td><td>89.80</td></tr>
+                  <tr><td>TerraMind-TiM-ds</td><td>88.82</td><td>87.62</td><td class="cell-highlight">90.05</td></tr>
+                  <tr><td>TerraMind-TiM-dsl</td><td>88.54</td><td>87.53</td><td>89.57</td></tr>
+                </tbody>
+              </table>
+              <p class="table-caption">Evaluation results of the ZeroFlood model using S1RTC as the input modality. Tokens generated by the Thinking-in-Modalities (TiM) process are denoted as: s (S2L2A), l (LULC), and d (DEM). The highest value in each column is highlighted in bold.</p>
+            </article>
+            <article class="result-table-card" id="result-s2l2a" hidden>
+              <h3>S2L2A input</h3>
+              <table>
+                <thead><tr><th>Model</th><th>F1</th><th>Recall</th><th>Precision</th></tr></thead>
+                <tbody>
+                  <tr><td>UNet</td><td>85.99</td><td>82.45</td><td>89.85</td></tr>
+                  <tr><td>ViT</td><td>86.36</td><td>84.64</td><td>88.15</td></tr>
+                  <tr><td>SSL4EO-MAE</td><td>85.16</td><td>82.93</td><td>87.50</td></tr>
+                  <tr><td>CROMA</td><td>86.46</td><td>84.33</td><td>88.71</td></tr>
+                  <tr><td>DOFA</td><td>87.08</td><td>84.71</td><td>89.59</td></tr>
+                  <td>TerraMind</td><td class="cell-highlight">88.58</td><td>86.66</td><td class="cell-highlight">90.60</td></tr>
+                  <tr><td>TerraMind-TiM-s</td><td>88.45</td><td>86.56</td><td>90.42</td></tr>
+                  <tr><td>TerraMind-TiM-sl</td><td>88.22</td><td>86.42</td><td>90.10</td></tr>
+                  <tr><td>TerraMind-TiM-dls</td><td>88.38</td><td class="cell-highlight">86.83</td><td>89.99</td></tr>
+                </tbody>
+              </table>
+              <p class="table-caption">Evaluation results of the ZeroFlood model using S2L2A as the input modality. Tokens generated by the Thinking-in-Modalities (TiM) process are denoted as: s (S1RTC), l (LULC), and d (DEM). The highest value in each column is highlighted in bold.</p>
+            </article>
+            <article class="result-table-card" id="result-both" hidden>
+              <h3>S1RTC + S2L2A input</h3>
+              <table>
+                <thead><tr><th>Model</th><th>F1</th><th>Recall</th><th>Precision</th></tr></thead>
+                <tbody>
+                  <tr><td>UNet</td><td>85.84</td><td>83.19</td><td>88.66</td></tr>
+                  <tr><td>ViT</td><td>86.48</td><td>84.49</td><td>88.57</td></tr>
+                  <tr><td>CROMA</td><td>85.85</td><td>83.29</td><td>88.57</td></tr>
+                  <tr><td>DOFA</td><td>87.06</td><td>85.41</td><td>88.77</td></tr>
+                  <td>TerraMind</td><td class="cell-highlight">89.16</td><td>87.17</td><td class="cell-highlight">91.25</td></tr>
+                  <tr><td>TerraMind-TiM-d</td><td>89.04</td><td>87.17</td><td>90.98</td></tr>
+                  <tr><td>TerraMind-TiM-dl</td><td>89.08</td><td class="cell-highlight">87.51</td><td>90.70</td></tr>
+                </tbody>
+              </table>
+              <p class="table-caption">Evaluation results of the ZeroFlood model using S1RTC and S2L2A as the input modality. Tokens generated by the Thinking-in-Modalities (TiM) process are denoted as: l (LULC) and d (DEM). The highest value in each column is highlighted in bold.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="alt" id="citation">
+        <div class="section-inner">
+          <p class="section-kicker">Open science</p>
+          <h2>Paper, code, and reproducibility artifacts</h2>
+          <pre class="bibtex" id="bibtex">
+@article{kim2025zeroflood,
+  title={ZeroFlood: Flood Hazard Mapping from Single-Modality SAR Using Geo-Foundation Models},
+  author={Kim, Hyeongkyun and Oikonomou, Orestis},
+  journal={arXiv preprint arXiv:2510.23364},
+  year={2025}
+}
+@misc{zerofloodCode2026,
+  title={zeroflood},
+  author={Kim, Hyeongkyun},
+  year={2026},
+  publisher={GitHub},
+  journal={GitHub repository},
+  url={https://github.com/khyeongkyun/zeroflood}
+}
+@misc{zerofloodDataset2026,
+  title={ZeroFlood},
+  author={Kim, Hyeongkyun},
+  year={2026},
+  publisher={Hugging Face},
+  journal={Hugging Face dataset},
+  url={https://huggingface.co/datasets/khyeongkyun/ZeroFlood}
+}
+          </pre>
+          <button class="copy-button" id="copy-citation" type="button">Copy BibTeX</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>This page is built for the Grand Final of TerraMind Blue-Sky challenge.</p>
+    </footer>
+
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <script src="script.js?v=europe-1"></script>
+  </body>
+</html>

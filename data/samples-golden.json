@@ -1,0 +1,180 @@
+{
+  "schema": "zeroflood-samples-golden",
+  "coordinate_order": "coordinates = [longitude, latitude]",
+  "samples": [
+    {
+      "id": "majortom_val_0042415",
+      "lon": 39.067232078823416,
+      "lat": 51.72780572142556,
+      "country": "Russia",
+      "region": "Voronezh Oblast",
+      "featured": true,
+      "rank": 0
+    },
+    {
+      "id": "majortom_val_0008701",
+      "lon": 39.067126656750425,
+      "lat": 51.6565936323588,
+      "country": "Russia",
+      "region": "Voronezh",
+      "featured": true,
+      "rank": 1
+    },
+    {
+      "id": "majortom_val_0028337",
+      "lon": 21.24634850996764,
+      "lat": 51.997066231955635,
+      "country": "Poland",
+      "region": "Ostrówek",
+      "featured": false,
+      "rank": 2
+    },
+    {
+      "id": "majortom_val_0016432",
+      "lon": -8.675541840204883,
+      "lat": 39.242923616847925,
+      "country": "Portugal",
+      "region": "Santarem",
+      "featured": true,
+      "rank": 3
+    },
+    {
+      "id": "majortom_val_0001137",
+      "lon": 2.22818582973337,
+      "lat": 48.85393026798181,
+      "country": "France",
+      "region": "Paris",
+      "featured": true,
+      "rank": 4
+    },
+    {
+      "id": "majortom_val_0055210",
+      "lon": 2.228550646904247,
+      "lat": 48.83018334336816,
+      "country": "France",
+      "region": "Boulogne-Billancourt",
+      "featured": true,
+      "rank": 5
+    },
+    {
+      "id": "majortom_val_0003621",
+      "lon": 38.10833148662739,
+      "lat": 45.30377256067098,
+      "country": "Russia",
+      "region": "Krasnodar Krai - 1",
+      "featured": true,
+      "rank": 6
+    },
+    {
+      "id": "majortom_val_0009714",
+      "lon": 7.740215392284373,
+      "lat": 47.237771015819135,
+      "country": "Switzerland",
+      "region": "Bannwil",
+      "featured": true,
+      "rank": 7
+    },
+    {
+      "id": "majortom_val_0030860",
+      "lon": 24.32374913925407,
+      "lat": 45.68473151232996,
+      "country": "Romania",
+      "region": "Racovița",
+      "featured": false,
+      "rank": 8
+    },
+    {
+      "id": "majortom_val_0007433",
+      "lon": 16.8593112496783,
+      "lat": 60.27908526523315,
+      "country": "Sweden",
+      "region": "Gysinge",
+      "featured": false,
+      "rank": 9
+    },
+    {
+      "id": "majortom_val_0024874",
+      "lon": 16.9575556888554,
+      "lat": 60.32509586355646,
+      "country": "Sweden",
+      "region": "Smedsäng",
+      "featured": true,
+      "rank": 10
+    },
+    {
+      "id": "majortom_val_0048608",
+      "lon": 17.35578594347183,
+      "lat": 51.52335039910748,
+      "country": "Poland",
+      "region": "Ruda Milicka",
+      "featured": true,
+      "rank": 11
+    },
+    {
+      "id": "majortom_val_0021028",
+      "lon": 40.708140507813106,
+      "lat": 45.9549133826006,
+      "country": "Russia",
+      "region": "Krasnodar Krai - 2",
+      "featured": false,
+      "rank": 12
+    },
+    {
+      "id": "majortom_val_0040371",
+      "lon": 14.95825132435499,
+      "lat": 48.96201906398765,
+      "country": "Czechia",
+      "region": "Staňkov",
+      "featured": false,
+      "rank": 13
+    },
+    {
+      "id": "majortom_val_0019546",
+      "lon": 15.135729257898765,
+      "lat": 63.267039877437675,
+      "country": "Sweden",
+      "region": "Handogsbodarna",
+      "featured": false,
+      "rank": 14
+    },
+    {
+      "id": "majortom_val_0068693",
+      "lon": 59.624360411656255,
+      "lat": 56.03695372190907,
+      "country": "Russia",
+      "region": "Chelyabinsk Oblast",
+      "featured": false,
+      "rank": 15
+    },
+    {
+      "id": "majortom_val_0003518",
+      "lon": 34.96782752956452,
+      "lat": 41.35030309352358,
+      "country": "Turkey",
+      "region": "Durağan/Sinop",
+      "featured": false,
+      "rank": 16
+    },
+    {
+      "id": "majortom_val_0003929",
+      "lon": 23.153212565890147,
+      "lat": 42.428050877774155,
+      "country": "Bulgaria",
+      "region": "Dolna Dikanya",
+      "featured": true,
+      "rank": 17
+    }
+ ],
+  "locations": {
+    "Russia": 5,
+    "Sweden": 3,
+    "France": 2,
+    "Poland": 2,
+    "Bulgaria": 1,
+    "Czechia": 1,
+    "Portugal": 1,
+    "Romania": 1,
+    "Switzerland": 1,
+    "Turkey": 1
+  }
+}
