@@ -606,7 +606,7 @@ h2 {
 }
 
 .framework-figure {
-  max-width: 1180px;
+  max-width: 100%;
   justify-self: center;
 }
 
@@ -1184,8 +1184,8 @@ tbody tr:hover td {
   }
   .framework-figure img {
     max-height: 420px;
+    padding: clamp(12px, 3vw, 32px);
   }
-
   .dataset-grid .paper-figure img {
     max-height: 320px;
   }
@@ -1227,6 +1227,7 @@ tbody tr:hover td {
   }
   .framework-figure img {
     max-height: 260px;
+    padding: 10px;
   }
 
   .dataset-grid .paper-figure img {
