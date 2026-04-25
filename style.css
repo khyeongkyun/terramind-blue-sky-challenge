@@ -1184,11 +1184,11 @@ tbody tr:hover td {
     grid-template-columns: 1fr;
   }
   .framework-figure img {
-    max-height: 420px;
+    max-height: none;
     padding: clamp(12px, 3vw, 32px);
   }
   .dataset-grid .paper-figure img {
-    max-height: 320px;
+    max-height: none;
   }
 }
 
@@ -1227,12 +1227,12 @@ tbody tr:hover td {
     font-size: 0.78rem;
   }
   .framework-figure img {
-    max-height: 260px;
+    max-height: none;
     padding: 10px;
   }
 
   .dataset-grid .paper-figure img {
-    max-height: 220px;
+    max-height: none;
   }
 }
 
