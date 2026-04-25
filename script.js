@@ -19,23 +19,23 @@ const OVERLAY_LAYERS = [
   { id: "tim-both-d", label: "Input: S1RTC, S2L2A (TiM: DEM)", path: "samples/pred/zf-tim-sar-opt/d" },
   { id: "tim-both-dl", label: "Input: S1RTC, S2L2A (TiM: DEM, LULC)", path: "samples/pred/zf-tim-sar-opt/dl" },
 ];
-const BASEMAPS = {
-  light: {
-    name: "OpenStreetMap Light",
-    tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-    attribution: "&copy; OpenStreetMap contributors",
-  },
-  satellite: {
-    name: "Esri World Imagery",
-    tiles: ["https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
-    attribution: "Tiles &copy; Esri",
-  },
-  terrain: {
-    name: "OpenTopoMap",
-    tiles: ["https://a.tile.opentopomap.org/{z}/{x}/{y}.png"],
-    attribution: "Map data &copy; OpenStreetMap contributors, SRTM | OpenTopoMap",
-  },
-};
+// const BASEMAPS = {
+//   light: {
+//     name: "OpenStreetMap Light",
+//     tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+//     attribution: "&copy; OpenStreetMap contributors",
+//   },
+//   satellite: {
+//     name: "Esri World Imagery",
+//     tiles: ["https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
+//     attribution: "Tiles &copy; Esri",
+//   },
+//   terrain: {
+//     name: "OpenTopoMap",
+//     tiles: ["https://a.tile.opentopomap.org/{z}/{x}/{y}.png"],
+//     attribution: "Map data &copy; OpenStreetMap contributors, SRTM | OpenTopoMap",
+//   },
+// };
 
 const EUROPE_VIEW_BOUNDS = [
   [-25, 35.5],
@@ -65,8 +65,8 @@ const el = {
   baseImage: document.getElementById("base-image"),
   overlayImage: document.getElementById("overlay-image"),
   overlaySlider: document.getElementById("overlay-slider"),
-  mapReset: document.getElementById("map-reset"),
-  mapFallback: document.getElementById("map-fallback"),
+  // mapReset: document.getElementById("map-reset"),
+  // mapFallback: document.getElementById("map-fallback"),
   copyCitation: document.getElementById("copy-citation"), // safe — guarded in bindEvents
   bibtex: document.getElementById("bibtex"),
   legendImage: document.getElementById("legend-image"),
@@ -75,29 +75,29 @@ const el = {
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-function basemapStyle(kind) {
-  const source = BASEMAPS[kind] || BASEMAPS.light;
-  return {
-    version: 8,
-    sources: {
-      basemap: {
-        type: "raster",
-        tiles: source.tiles,
-        tileSize: 256,
-        attribution: source.attribution,
-      },
-    },
-    layers: [
-      {
-        id: "basemap",
-        type: "raster",
-        source: "basemap",
-        minzoom: 0,
-        maxzoom: 19,
-      },
-    ],
-  };
-}
+// function basemapStyle(kind) {
+//   const source = BASEMAPS[kind] || BASEMAPS.light;
+//   return {
+//     version: 8,
+//     sources: {
+//       basemap: {
+//         type: "raster",
+//         tiles: source.tiles,
+//         tileSize: 256,
+//         attribution: source.attribution,
+//       },
+//     },
+//     layers: [
+//       {
+//         id: "basemap",
+//         type: "raster",
+//         source: "basemap",
+//         minzoom: 0,
+//         maxzoom: 19,
+//       },
+//     ],
+//   };
+// }
 
 function imagePath(layer, sample) {
   return `${layer.path}/${sample.id}.png`;
@@ -143,45 +143,45 @@ function countrySamples() {
   return state.samples.filter((sample) => sample.country === state.country);
 }
 
-function sampleBounds(samples) {
-  const valid = samples.filter((sample) => {
-    const [lng, lat] = coordinatePair(sample);
-    return Number.isFinite(lng) && Number.isFinite(lat);
-  });
-  if (!valid.length || !window.maplibregl) return null;
+// function sampleBounds(samples) {
+//   const valid = samples.filter((sample) => {
+//     const [lng, lat] = coordinatePair(sample);
+//     return Number.isFinite(lng) && Number.isFinite(lat);
+//   });
+//   if (!valid.length || !window.maplibregl) return null;
 
-  const firstPoint = coordinatePair(valid[0]);
-  const bounds = new maplibregl.LngLatBounds(
-    firstPoint,
-    firstPoint,
-  );
-  valid.slice(1).forEach((sample) => bounds.extend(coordinatePair(sample)));
-  return bounds;
-}
+//   const firstPoint = coordinatePair(valid[0]);
+//   const bounds = new maplibregl.LngLatBounds(
+//     firstPoint,
+//     firstPoint,
+//   );
+//   valid.slice(1).forEach((sample) => bounds.extend(coordinatePair(sample)));
+//   return bounds;
+// }
 
-function fitSamples(samples, options = {}) {
-  if (!state.map || !samples.length) return;
+// function fitSamples(samples, options = {}) {
+//   if (!state.map || !samples.length) return;
 
-  if (samples.length === 1) {
-    state.map[options.animate ? "flyTo" : "jumpTo"]({
-      center: coordinatePair(samples[0]),
-      zoom: 6,
-      duration: options.animate ? 900 : 0,
-      essential: true,
-    });
-    return;
-  }
+//   if (samples.length === 1) {
+//     state.map[options.animate ? "flyTo" : "jumpTo"]({
+//       center: coordinatePair(samples[0]),
+//       zoom: 6,
+//       duration: options.animate ? 900 : 0,
+//       essential: true,
+//     });
+//     return;
+//   }
 
-  const bounds = sampleBounds(samples);
-  if (!bounds) return;
+//   const bounds = sampleBounds(samples);
+//   if (!bounds) return;
 
-  state.map.fitBounds(bounds, {
-    padding: options.padding || { top: 70, right: 70, bottom: 70, left: 70 },
-    maxZoom: options.maxZoom || 5.8,
-    duration: options.animate ? 900 : 0,
-    essential: true,
-  });
-}
+//   state.map.fitBounds(bounds, {
+//     padding: options.padding || { top: 70, right: 70, bottom: 70, left: 70 },
+//     maxZoom: options.maxZoom || 5.8,
+//     duration: options.animate ? 900 : 0,
+//     essential: true,
+//   });
+// }
 
 function formatCount(value, counter) {
   const decimals = Number(counter.dataset.decimals || 0);
@@ -350,64 +350,6 @@ function setActiveSample(sample, options = {}) {
   updateMeta();
   updateImages();
   updateMarkerStates();
-
-  if (options.fly && state.map) {
-    state.map.flyTo({
-      center: coordinatePair(sample),
-      zoom: Math.max(state.map.getZoom(), 6.2),
-      duration: 1100,
-      essential: true,
-    });
-  }
-}
-
-function initMap() {
-  if (!window.maplibregl) {
-    el.mapFallback.hidden = false;
-    return;
-  }
-
-  state.map = new maplibregl.Map({
-    container: "zf-map",
-    style: basemapStyle(state.mapStyle),
-    center: [20, 51],
-    zoom: 3.2,
-    minZoom: 1.5,
-    maxZoom: 12,
-    maxBounds: EUROPE_VIEW_BOUNDS,
-    attributionControl: false,
-  });
-
-  state.map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-right");
-  state.map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
-
-  state.map.on("load", renderMarkers);
-  state.map.on("error", () => {
-    el.mapFallback.hidden = false;
-  });
-}
-
-function renderMarkers() {
-  if (!state.map || state.markers.size > 0) return;
-
-  state.samples.forEach((sample) => {
-    const node = document.createElement("button");
-    node.type = "button";
-    node.className = "map-marker";
-    node.title = `${sample.country} / ${sample.region || sample.id} | lon ${sample.lon.toFixed(4)}, lat ${sample.lat.toFixed(4)}`;
-    node.addEventListener("click", () => {
-      setActiveSample(sample, { fly: true });
-    });
-
-    const marker = new maplibregl.Marker({ element: node, anchor: "center" })
-      .setLngLat(coordinatePair(sample))
-      .addTo(state.map);
-
-    state.markers.set(sample.id, { marker, node, sample });
-  });
-
-  updateMarkerStates();
-  fitSamples(state.samples);
 }
 
 function bindEvents() {
@@ -439,24 +381,24 @@ function bindEvents() {
   });
   el.comparison.style.setProperty("--reveal", `${el.overlaySlider.value}%`);
 
-  document.querySelectorAll(".map-style[data-style]").forEach((button) => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll(".map-style[data-style]").forEach((item) => item.classList.remove("active"));
-      button.classList.add("active");
-      state.mapStyle = button.dataset.style;
-      if (state.map) state.map.setStyle(basemapStyle(state.mapStyle));
-    });
-  });
+  // document.querySelectorAll(".map-style[data-style]").forEach((button) => {
+  //   button.addEventListener("click", () => {
+  //     document.querySelectorAll(".map-style[data-style]").forEach((item) => item.classList.remove("active"));
+  //     button.classList.add("active");
+  //     state.mapStyle = button.dataset.style;
+  //     if (state.map) state.map.setStyle(basemapStyle(state.mapStyle));
+  //   });
+  // });
 
-  if (el.mapReset) {
-    el.mapReset.addEventListener("click", () => {
-      state.country = "all";
-      el.countrySelect.value = "all";
-      populateSampleSelect();
-      updateMarkerStates();
-      fitSamples(state.samples, { animate: true });
-    });
-  }
+  // if (el.mapReset) {
+  //   el.mapReset.addEventListener("click", () => {
+  //     state.country = "all";
+  //     el.countrySelect.value = "all";
+  //     populateSampleSelect();
+  //     updateMarkerStates();
+  //     fitSamples(state.samples, { animate: true });
+  //   });
+  // }
 
   if (el.copyCitation) {
     el.copyCitation.addEventListener("click", async () => {
@@ -509,7 +451,7 @@ async function init() {
   setActiveSample(initial);
   populateSampleSelect();
   updateLegend(); // ← add this
-  initMap();
+  // initMap();
 }
 
 initPageEffects();
