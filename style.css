@@ -578,6 +578,9 @@ h2 {
   grid-row: 1;
   height: 100%;
   min-height: 560px;
+  width: 100%;
+  max-width: 400px;
+  margin-inline: auto;
 }
 
 /* ── end Model & Demo layout ─────────────────────────────────────────────── */
@@ -614,10 +617,12 @@ h2 {
 .framework-figure img {
   max-height: 600px;
   width: 100%;
+  max-width: 600px;
   object-fit: contain;
   padding: clamp(24px, 4vw, 56px);
+  display: block;
+  margin-inline: auto;  /* centers the element horizontally */
 }
-
 .paper-figure figcaption {
   border-top: 1px solid var(--line);
   padding: 16px 18px;
@@ -664,8 +669,11 @@ h2 {
 .dataset-grid .paper-figure img {
   max-height: 600px;
   width: 100%;
+  max-width: 600px;
   object-fit: contain;
   padding: clamp(12px, 4vw, 24px);
+  display: block;
+  margin-inline: auto;  /* centers the element horizontally */
 }
 
 .stat-grid {

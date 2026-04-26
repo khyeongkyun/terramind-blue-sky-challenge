@@ -238,7 +238,7 @@ function updateImages() {
 function updateMeta() {
   const sample = state.activeSample;
   if (!sample) return;
-  el.sampleTitle.textContent = `${sample.country} / ${sample.region || sample.id}`;
+  el.sampleTitle.textContent = `${sample.region}, ${sample.country}`;
   el.sampleCoords.textContent = `Latitude ${formatCoord(sample.lat, "N", "S")} · Longitude ${formatCoord(sample.lon, "E", "W")}`;
   el.sampleSelect.value = sample.id;
 }
