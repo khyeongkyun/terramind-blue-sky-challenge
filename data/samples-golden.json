@@ -61,7 +61,7 @@
       "lon": 38.10833148662739,
       "lat": 45.30377256067098,
       "country": "Russia",
-      "region": "Krasnodar Krai - 1",
+      "region": "Krasnodar Krai (1)",
       "featured": true,
       "rank": 6
     },
@@ -115,7 +115,7 @@
       "lon": 40.708140507813106,
       "lat": 45.9549133826006,
       "country": "Russia",
-      "region": "Krasnodar Krai - 2",
+      "region": "Krasnodar Krai (2)",
       "featured": false,
       "rank": 12
     },
