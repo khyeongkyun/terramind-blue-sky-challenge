@@ -100,7 +100,7 @@
               <figure class="paper-figure framework-figure">
                 <img src="assets/model.png" alt="ZeroFlood model architecture">
                 <figcaption>
-                    A single- or double-modality input (Sentinel-1, Sentinel-2, or both) is processed through a Thinking-in-Modalities stage that generates auxiliary modalities (e.g., cross-sensor translation, land use/land cover, and digital elevation). These enriched representations are then fed into a TerraMind-based encoder–decoder (with UPerNet) to produce flood hazard area predictions while minimizing data and computational requirements. This diagram shows an example of S1RTC input with TiM modalities, LULC and DEM.
+                    A single- or double-modality input (Sentinel-1, Sentinel-2, or both) is processed through a Thinking-in-Modalities stage that generates auxiliary modalities (e.g., cross-sensor translation, land use/land cover, and digital elevation). These enriched representations are then fed into a TerraMind-based encoder–decoder (with UPerNet) to produce flood hazard area predictions. Therefore, it benefits less data source and computation requirements compared to simulation-based model. This diagram shows an example of S1RTC input with TiM modalities, LULC and DEM.
                 </figcaption>
               </figure>
             </div>
@@ -156,7 +156,7 @@
           <div class="dataset-grid">
             <figure class="paper-figure">
               <img src="assets/dataset_1.png" alt="ZeroFlood dataset creation diagram">
-              <figcaption>The ZeroFlood dataset consists of two components: an EO dataset (TerraMesh) and flood hazard simulation masks for the European region (LISFLOOD-FP).</figcaption>
+              <figcaption>The ZeroFlood dataset combines two public datasets - an EO dataset (TerraMesh) and flood hazard simulation masks for the European region (LISFLOOD-FP) - following the rule-based quality control and spatial alignment process.</figcaption>
             </figure>
             <figure class="paper-figure">
               <img src="assets/dataset_2.png" alt="Spatial heat map of ZeroFlood samples">
